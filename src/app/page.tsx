@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Progress } from "@/components/ui/progress";
 
 interface OverviewCardProps {
   title: string;
@@ -127,6 +128,14 @@ const sampleNFTs = [
     journeyProgress: 20,
     totalRewardsEarned: "$93.07",
   },
+  {
+    nftNo: "706",
+    nftLifetime: "14y 10d 3h",
+    currentStatus: "Inactive",
+    location: "Port of Signapore",
+    journeyProgress: 100,
+    totalRewardsEarned: "$93.07",
+  },
 ];
 
 interface TableCellProps {
@@ -152,23 +161,26 @@ function NFTCell({
       <TableCell>{nftLifetime}</TableCell>
       <TableCell>{currentStatus}</TableCell>
       <TableCell>{location}</TableCell>
-      <TableCell>{journeyProgress}</TableCell>
-      <TableCell>{totalRewardsEarned}</TableCell>
+      <TableCell className="flex flex-row gap-2">
+        <Progress value={journeyProgress} />
+        <span className="text-xs">{journeyProgress}%</span>
+      </TableCell>
+      <TableCell className="text-right">{totalRewardsEarned}</TableCell>
     </TableRow>
   );
 }
 
 function ContainerTable() {
   return (
-    <Table>
+    <Table className="text-primary">
       <TableHeader>
-        <TableRow>
-          <TableHead className="">NFT No:</TableHead>
-          <TableHead>NFT Lifetime</TableHead>
-          <TableHead>Current Status</TableHead>
-          <TableHead>Location</TableHead>
-          <TableHead>Journey progress</TableHead>
-          <TableHead>Total rewards earned</TableHead>
+        <TableRow className="">
+          <TableHead className="text-primary">NFT No:</TableHead>
+          <TableHead className="text-primary">NFT Lifetime</TableHead>
+          <TableHead className="text-primary">Current Status</TableHead>
+          <TableHead className="text-primary">Location</TableHead>
+          <TableHead className="text-primary">Journey progress</TableHead>
+          <TableHead className="text-right text-primary">Total rewards earned</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
