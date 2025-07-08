@@ -65,7 +65,7 @@ function NextSale() {
       <p>30th of July, 2pm UTC</p>
       <p>28d 23h 29m 38s</p>
       <Progress value={65} />
-      <Button>Register</Button>
+      <Button className="rounded-[0.4rem] bg-[#303032] text-[#c1c1c1] hover:bg-[#46464B] cursor-pointer">Register</Button>
     </Card>
   );
 }

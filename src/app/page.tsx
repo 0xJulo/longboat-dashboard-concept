@@ -10,6 +10,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Progress } from "@/components/ui/progress";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
 interface OverviewCardProps {
   title: string;
@@ -75,13 +85,22 @@ function NFTCard({ image, nftNumber, price, availableRewards }: NFTCardProps) {
       />
       <div className="flex flex-col gap-4 px-4 py-2">
         <div className="flex flex-row gap-2 items-end">
-          <p className="text-white text-[2rem] font-semibold leading-none">{nftNumber}</p>
+          <p className="text-white text-[2rem] font-semibold leading-none">
+            {nftNumber}
+          </p>
           <p className="text-[#747474] text-[0.8rem]">({price} WETH)</p>
         </div>
-        <p className="text-[1rem] mb-1">Available Rewards: <span className="font-semibold">${availableRewards}</span></p>
+        <p className="text-[1rem] mb-1">
+          Available Rewards:{" "}
+          <span className="font-semibold">${availableRewards}</span>
+        </p>
         <div className="flex gap-2 w-full">
-          <Button className="flex-1 rounded-[0.4rem] bg-[#303032] cursor-pointer">Manage</Button>
-          <Button className="flex-1 rounded-[0.4rem] bg-[#303032] cursor-pointer">Claim</Button>
+          <Button className="flex-1 rounded-[0.4rem] bg-[#303032] text-[#c1c1c1] hover:bg-[#46464B] cursor-pointer">
+            Manage
+          </Button>
+          <Button className="flex-1 rounded-[0.4rem] bg-[#303032] text-[#c1c1c1] hover:bg-[#46464B] cursor-pointer">
+            Claim
+          </Button>
         </div>
       </div>
     </Card>
@@ -101,7 +120,7 @@ function MyNFTs() {
         />
         <NFTCard
           image="/61.png"
-          nftNumber="488"
+          nftNumber="61"
           price="0.0165 "
           availableRewards="108.08"
         />
@@ -141,14 +160,22 @@ const sampleNFTs = [
     journeyProgress: 20,
     totalRewardsEarned: "$93.07",
   },
-  {
-    nftNo: "706",
-    nftLifetime: "14y 10d 3h",
-    currentStatus: "Inactive",
-    location: "Port of Signapore",
-    journeyProgress: 100,
-    totalRewardsEarned: "$93.07",
-  },
+    {
+      nftNo: "706",
+      nftLifetime: "14y 10d 3h",
+      currentStatus: "Inactive",
+      location: "Port of Signapore",
+      journeyProgress: 100,
+      totalRewardsEarned: "$93.07",
+    },
+    {
+      nftNo: "132",
+      nftLifetime: "14y 10d 3h",
+      currentStatus: "Inactive",
+      location: "Port of Signapore",
+      journeyProgress: 100,
+      totalRewardsEarned: "$93.07",
+    },
 ];
 
 interface TableCellProps {
@@ -160,7 +187,7 @@ interface TableCellProps {
   totalRewardsEarned: string;
 }
 
-function NFTCell({
+function NFTContainerCell({
   nftNo,
   nftLifetime,
   currentStatus,
@@ -170,15 +197,15 @@ function NFTCell({
 }: TableCellProps) {
   return (
     <TableRow>
-      <TableCell className="font-medium">{nftNo}</TableCell>
-      <TableCell>{nftLifetime}</TableCell>
-      <TableCell>{currentStatus}</TableCell>
-      <TableCell>{location}</TableCell>
-      <TableCell className="flex flex-row gap-2">
+      <TableCell className="font-medium px-4 text-[1rem] align-middle">{nftNo}</TableCell>
+      <TableCell className="px-4 text-[1rem] align-middle">{nftLifetime}</TableCell>
+      <TableCell className="px-4 text-[1rem] align-middle">{currentStatus}</TableCell>
+      <TableCell className="px-4 text-[1rem] align-middle">{location}</TableCell>
+      <TableCell className="flex flex-row gap-2 px-4 text-[1rem] align-middle items-center mt-1">
         <Progress value={journeyProgress} />
         <span className="text-xs">{journeyProgress}%</span>
       </TableCell>
-      <TableCell className="text-right">{totalRewardsEarned}</TableCell>
+      <TableCell className="text-right px-4 text-[1rem] align-middle">{totalRewardsEarned}</TableCell>
     </TableRow>
   );
 }
@@ -187,21 +214,53 @@ function ContainerTable() {
   return (
     <Table className="text-primary">
       <TableHeader>
-        <TableRow className="">
-          <TableHead className="text-primary">NFT No:</TableHead>
-          <TableHead className="text-primary">NFT Lifetime</TableHead>
-          <TableHead className="text-primary">Current Status</TableHead>
-          <TableHead className="text-primary">Location</TableHead>
-          <TableHead className="text-primary">Journey progress</TableHead>
-          <TableHead className="text-right text-primary">Total rewards earned</TableHead>
+        <TableRow>
+          <TableHead className="text-[#747474] px-4 text-[0.8rem]">NFT No:</TableHead>
+          <TableHead className="text-[#747474] px-4 text-[0.8rem]">NFT Lifetime</TableHead>
+          <TableHead className="text-[#747474] px-4 text-[0.8rem]">Current Status</TableHead>
+          <TableHead className="text-[#747474] px-4 text-[0.8rem]">Location</TableHead>
+          <TableHead className="text-[#747474] px-4 text-[0.8rem]">Journey progress</TableHead>
+          <TableHead className="text-right text-[#747474] px-4 text-[0.8rem]">
+            Total rewards earned
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {sampleNFTs.map((nft) => (
-          <NFTCell key={nft.nftNo} {...nft} />
+          <NFTContainerCell key={nft.nftNo} {...nft} />
         ))}
       </TableBody>
     </Table>
+  );
+}
+
+interface ContainerFilterProps {
+  filters: string[];
+  title: string;
+  placeholder: string;
+}
+
+function ContainerFilters({
+  filters,
+  title,
+  placeholder,
+}: ContainerFilterProps) {
+  return (
+    <Select>
+      <SelectTrigger className="w-[10rem] !bg-[#303032] !text-[#c1c1c1] !hover:bg-[#46464B] cursor-pointer">
+        <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
+      <SelectContent className="!bg-[#303032] !text-[#c1c1c1] !hover:bg-[#46464B]">
+        <SelectGroup>
+          <SelectLabel>{title}</SelectLabel>
+          {filters.map((filter) => (
+            <SelectItem key={filter} value={filter}>
+              {filter}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   );
 }
 
@@ -210,6 +269,24 @@ function ContainerInformation() {
     <div className="pb-4 px-6">
       <h2 className="mb-4">Container Information</h2>
       <Card className="bg-[#222224] w-full border border-border">
+        <div className="flex flex-row gap-2 px-4">
+          <Input placeholder="Search by name" className="w-[20rem] !bg-[#303032] !text-[#c1c1c1] !hover:bg-[#46464B] cursor-pointer placeholder:text-[#c1c1c1]" />
+          <ContainerFilters
+            filters={["All", "Active", "Inactive"]}
+            title="Current status"
+            placeholder="Current Status"
+          />
+          <ContainerFilters
+            filters={["All", "Active", "Inactive"]}
+            title="Lifetime"
+            placeholder="Lifetime"
+          />
+          <ContainerFilters
+            filters={["All", "Active", "Inactive"]}
+            title="Total rewards"
+            placeholder="Total Rewards"
+          />
+        </div>
         <ContainerTable />
       </Card>
     </div>
@@ -221,8 +298,12 @@ function PageHeader() {
     <header className="h-[5rem] border-b border-border flex items-center justify-between py-4 px-6">
       <h1>My Assets</h1>
       <div className="flex gap-2">
-        <Button className="rounded-[0.4rem]">Buy Assets</Button>
-        <Button className="rounded-[0.4rem]">Sell Assets</Button>
+        <Button className="rounded-[0.4rem] bg-[#303032] text-[#c1c1c1] hover:bg-[#46464B] cursor-pointer">
+          Buy Assets
+        </Button>
+        <Button className="rounded-[0.4rem] bg-[#303032] text-[#c1c1c1] hover:bg-[#46464B] cursor-pointer">
+          Sell Assets
+        </Button>
       </div>
     </header>
   );
