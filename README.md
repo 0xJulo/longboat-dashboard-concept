@@ -24,3 +24,4 @@ Below is an image of the current build. This can also be viewed at: https://long
 
 - [ ] Fix mobile styling on dashboard
 - [ ] Add in card carousel feature
+- [ ] Clean up component structure
