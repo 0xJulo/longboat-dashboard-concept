@@ -128,7 +128,7 @@ function SearchButton() {
 
 export function AppSidebar() {
   return (
-    <Sidebar className="h-screen border-r border-border" collapsible="none">
+    <Sidebar className="fixed left-0 top-0 h-screen border-r border-border z-50" collapsible="none">
       <SidebarHeader className="h-[5rem] border-b border-border flex items-start justify-center px-2">
         <div className="px-1 py-2 flex items-center gap-2">
           <Image

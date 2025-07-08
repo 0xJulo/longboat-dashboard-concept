@@ -65,7 +65,7 @@ interface NFTCardProps {
 
 function NFTCard({ image, nftNumber, price, availableRewards }: NFTCardProps) {
   return (
-    <Card className="p-0 w-[20rem] text-primary">
+    <Card className="flex flex-1 gap-2 p-0 pb-2 w-[20rem] text-primary bg-[#222224]">
       <Image
         src={image}
         alt="NFT"
@@ -73,15 +73,15 @@ function NFTCard({ image, nftNumber, price, availableRewards }: NFTCardProps) {
         height={500}
         className="w-full h-[20rem] rounded-t-lg object-cover "
       />
-      <div className="px-4 py-2">
-        <div className="flex flex-row gap-2 ">
-          <p>{nftNumber}</p>
-          <p>{price} WETH</p>
+      <div className="flex flex-col gap-4 px-4 py-2">
+        <div className="flex flex-row gap-2 items-end">
+          <p className="text-white text-[2rem] font-semibold leading-none">{nftNumber}</p>
+          <p className="text-[#747474] text-[0.8rem]">({price} WETH)</p>
         </div>
-        <p>Available Rewards: {availableRewards}</p>
+        <p className="text-[1rem] mb-1">Available Rewards: <span className="font-semibold">${availableRewards}</span></p>
         <div className="flex gap-2 w-full">
-          <Button className="rounded-[0.4rem]">Manage</Button>
-          <Button className="rounded-[0.4rem]">Claim</Button>
+          <Button className="flex-1 rounded-[0.4rem] bg-[#303032] cursor-pointer">Manage</Button>
+          <Button className="flex-1 rounded-[0.4rem] bg-[#303032] cursor-pointer">Claim</Button>
         </div>
       </div>
     </Card>
@@ -90,19 +90,31 @@ function NFTCard({ image, nftNumber, price, availableRewards }: NFTCardProps) {
 
 function MyNFTs() {
   return (
-    <div className="pb-4 px-6">
-      <h2>My NFTs</h2>
+    <div className="w-fullpb-4 px-6 mb-6">
+      <h2 className="mb-4">My NFTs</h2>
       <div className="flex gap-4">
         <NFTCard
           image="/488.png"
           nftNumber="488"
-          price="1000"
-          availableRewards="1000"
+          price="0.0165 "
+          availableRewards="47.12"
         />
         <NFTCard
           image="/61.png"
           nftNumber="488"
-          price="1000"
+          price="0.0165 "
+          availableRewards="108.08"
+        />
+        <NFTCard
+          image="/706.png"
+          nftNumber="706"
+          price="0.0165 "
+          availableRewards="1000"
+        />
+        <NFTCard
+          image="/132.png"
+          nftNumber="132"
+          price="0.0165 "
           availableRewards="1000"
         />
       </div>
@@ -110,6 +122,7 @@ function MyNFTs() {
   );
 }
 
+// Container information
 
 const sampleNFTs = [
   {
@@ -195,8 +208,8 @@ function ContainerTable() {
 function ContainerInformation() {
   return (
     <div className="pb-4 px-6">
-      <h2>Container Information</h2>
-      <Card className="bg-card w-full border border-border">
+      <h2 className="mb-4">Container Information</h2>
+      <Card className="bg-[#222224] w-full border border-border">
         <ContainerTable />
       </Card>
     </div>
