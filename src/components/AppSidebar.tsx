@@ -5,7 +5,6 @@ import {
   Search,
   LeaderboardOutlined,
   ImageOutlined,
-  Settings,
   StarBorder,
   CheckCircleOutline,
   HelpOutline,
@@ -60,33 +59,38 @@ const menuItems = [
 
 function NextSale() {
   return (
-    <Card className="bg-card text-primary border border-border px-2 py-2">
-      <p>Next sale</p>
-      <p>30th of July, 2pm UTC</p>
-      <p>28d 23h 29m 38s</p>
-      <Progress value={65} />
-      <Button className="rounded-[0.4rem] bg-[#303032] text-[#c1c1c1] hover:bg-[#46464B] cursor-pointer">Register</Button>
+    <Card className="flex flex-col gap-4 bg-card text-primary border border-border p-4">
+      <div className="flex flex-col gap-0">
+        <p className="text-[#747474] text-[0.9rem]">Next sale</p>
+        <p className="text-[#c1c1c1] text-[1.2rem] font-semibold">30th of July, 2pm UTC</p>
+      </div>
+      <div className="flex flex-col gap-2">
+        <p className="text-[#747474] text-[0.9rem]">28d 23h 29m 38s</p>
+        <Progress value={65} className="h-3" />
+      </div>
+      <Button className="rounded-[0.4rem] bg-[#303032] text-[#c1c1c1] hover:bg-[#46464B] cursor-pointer mt-2">
+        Register
+      </Button>
     </Card>
   );
 }
 
 function UserProfile() {
   return (
-    <Card className="bg-card text-primary border border-border px-2 py-2">
+    <Card className="bg-card text-primary border border-border px-4 py-3">
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-        <Avatar>
-          <AvatarImage src="/julo.jpg" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col">
-          <p>Julo</p>
-          <p>0xF138...FD90C</p>
+          <Avatar>
+            <AvatarImage src="/julo.jpg" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <p className="text-[#c1c1c1] font-semibold">Julo</p>
+            <p className="text-[#747474] text-[0.7rem]">0xF138...FD90C</p>
+          </div>
         </div>
-        </div>
-        <SettingsOutlined />
+        <SettingsOutlined className="text-[#6B6B6B] cursor-pointer" />
       </div>
-      
     </Card>
   );
 }
@@ -97,10 +101,10 @@ function NavigationMenu() {
       {menuItems.map((item) => (
         <SidebarMenuItem
           key={item.title}
-          className="bg-card px-1 py-2 rounded-lg border border-border mb-1"
+          className="bg-card rounded-lg border border-border mb-1"
         >
           <SidebarMenuButton asChild>
-            <a href={item.url}>
+            <a href={item.url} className="block px-3 py-6 rounded-lg hover:!bg-[#292929]">
               <item.icon className="text-primary" fontSize="medium" />
               <span className="text-[0.9rem] text-primary">{item.title}</span>
             </a>
@@ -116,10 +120,13 @@ function SearchButton() {
   return (
     <Button
       variant="outline"
-      className="w-full flex items-center justify-start bg-card px-1 py-6 rounded-lg"
+      className="w-full text-primary flex items-center justify-between !bg-card !border !border-border pl-2 pr-5 py-6 rounded-lg hover:!bg-[#292929] cursor-pointer"
     >
-      <Search className="mr-2 h-4 w-4" />
-      Ask anything
+      <div className="flex items-center gap-2">
+        <Search className="h-4 w-4" />
+        Ask anything
+      </div>
+      <span className="text-[#6B6B6B]">⌘K</span>
     </Button>
   );
 }
@@ -128,7 +135,10 @@ function SearchButton() {
 
 export function AppSidebar() {
   return (
-    <Sidebar className="fixed left-0 top-0 h-screen border-r border-border z-50" collapsible="none">
+    <Sidebar
+      className="fixed left-0 top-0 h-screen border-r border-border z-50"
+      collapsible="none"
+    >
       <SidebarHeader className="h-[5rem] border-b border-border flex items-start justify-center px-2">
         <div className="px-1 py-2 flex items-center gap-2">
           <Image
@@ -143,11 +153,12 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent className="px-2">
         <SidebarGroup>
-          <SidebarGroupContent>
+          <SidebarGroupContent className="mt-2">
             <SearchButton />
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
+          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <NavigationMenu />
           </SidebarGroupContent>

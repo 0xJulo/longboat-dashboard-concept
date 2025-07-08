@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -42,7 +42,7 @@ function OverviewCard({ title, data, subtitle }: OverviewCardProps) {
 function Overview() {
   return (
     <div className="w-full flex flex-col gap-4 pb-4 px-6">
-      <h2>Overview</h2>
+      <h2 className="text-[1.2rem] text-[#939393]">Overview</h2>
       <div className="flex gap-4">
         <OverviewCard
           title="Total Earned"
@@ -110,7 +110,7 @@ function NFTCard({ image, nftNumber, price, availableRewards }: NFTCardProps) {
 function MyNFTs() {
   return (
     <div className="w-fullpb-4 px-6 mb-6">
-      <h2 className="mb-4">My NFTs</h2>
+      <h2 className="mb-4 text-[1.2rem] text-[#939393]">My NFTs (4)</h2>
       <div className="flex gap-4">
         <NFTCard
           image="/488.png"
@@ -267,7 +267,7 @@ function ContainerFilters({
 function ContainerInformation() {
   return (
     <div className="pb-4 px-6">
-      <h2 className="mb-4">Container Information</h2>
+      <h2 className="mb-4 text-[1.2rem] text-[#939393]">Container Information</h2>
       <Card className="bg-[#222224] w-full border border-border">
         <div className="flex flex-row gap-2 px-4">
           <Input placeholder="Search by name" className="w-[20rem] !bg-[#303032] !text-[#c1c1c1] !hover:bg-[#46464B] cursor-pointer placeholder:text-[#c1c1c1]" />
@@ -296,7 +296,7 @@ function ContainerInformation() {
 function PageHeader() {
   return (
     <header className="h-[5rem] border-b border-border flex items-center justify-between py-4 px-6">
-      <h1>My Assets</h1>
+      <h1 className="text-[1.5rem] font-semibold">My Assets</h1>
       <div className="flex gap-2">
         <Button className="rounded-[0.4rem] bg-[#303032] text-[#c1c1c1] hover:bg-[#46464B] cursor-pointer">
           Buy Assets
